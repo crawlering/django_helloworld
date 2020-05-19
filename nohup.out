@@ -1,0 +1,5 @@
+[19/May/2020 16:55:26] "GET / HTTP/1.1" 200 16348
+[19/May/2020 16:55:26] "GET /static/admin/css/fonts.css HTTP/1.1" 304 0
+[19/May/2020 16:55:26] "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 304 0
+[19/May/2020 16:55:26] "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 304 0
+[19/May/2020 16:55:26] "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 304 0

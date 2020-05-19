@@ -5,7 +5,7 @@ pipeline {
             steps {
                 echo 'Hello World,`pwd`'
                 sh 'pwd'
-                sh 'nohup python3.6 manage.py runserver 0.0.0.0:60001&'
+                sh 'nohup python3.6 manage.py runserver 0.0.0.0:60001 >> /tmp/django.log 2>&1 &'
             }
         }
     }
