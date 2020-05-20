@@ -1,6 +1,7 @@
 node {
     stage('start...') {
     println env
+    println env.GIT_COMMIT
     sh 'printenv'
     GIT_COMMIT=sh returnStdout: true ,script: 'echo $GIT_COMMIT'
     GIT_PREVIOUS_COMMIT=sh returnStdout: true ,script: 'echo $GIT_PREVIOUS_COMMIT'
