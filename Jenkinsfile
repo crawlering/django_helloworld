@@ -12,6 +12,7 @@ pipeline {
                         echo "Testing the ${browsers[i]} browser"
                     }
                 }
+                echo 'end'
             }
         }
     }
