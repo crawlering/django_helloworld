@@ -3,6 +3,8 @@ node {
     GIT_COMMIT=sh returnStdout: true ,script: 'echo $GIT_COMMIT'
     GIT_PREVIOUS_COMMIT=sh returnStdout: true ,script: 'echo $GIT_PREVIOUS_COMMIT'
     echo GIT_COMMIT
+    sh 'printenv'
+    sh 'echo $GIT_COMMIT'
     if (GIT_COMMIT==GIT_PREVIOUS_COMMIT) {
         println GIT_COMMIT
         println GIT_PREVIOUS_COMMIT
