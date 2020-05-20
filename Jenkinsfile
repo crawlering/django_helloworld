@@ -1,21 +1,8 @@
-pipeline {
-    agent any
-    stages {
-        stage('Example') {
-            steps {
-                echo 'Hello World'
-
-                script {
-                    sh 'setsid python3.6 manage.py runserver 0.0.0.0:60001 >> /tmp/django.log 2>&1 &'
-                    def browsers = ['chrome', 'firefox']
-                    for (int i = 0; i < browsers.size(); ++i) {
-                        echo "Testing the ${browsers[i]} browser"
-                    }
-                    def MY_X='123'
-                }
-                echo $MY_X
-                echo 'end'
-            }
-        }
+node {
+    stage('pull code'){
+        echo 'pull code success!'
+	sh 'setsid python3.6 manage.py runserver 0.0.0.0:60001 >> /tmp/django.log 2>&1 &'
+	def MY_X='abc'
+	echo $MY_X
     }
 }
