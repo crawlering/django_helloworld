@@ -7,7 +7,7 @@ pipeline {
                 sh 'pwd'
                 sh 'printenv'
                 script {
-		    setsid python3.6 manage.py runserver 0.0.0.0:60001 >> /tmp/django.log 2>&1 &
+		    sh 'setsid python3.6 manage.py runserver 0.0.0.0:60001 >> /tmp/django.log 2>&1 &'
 		    MY_A='123'
                  
 }
