@@ -11,7 +11,7 @@ pipeline {
                     for (int i = 0; i < browsers.size(); ++i) {
                         echo "Testing the ${browsers[i]} browser"
                     }
-                    MY_X='123'
+                    def MY_X='123'
                 }
                 echo $MY_X
                 echo 'end'
