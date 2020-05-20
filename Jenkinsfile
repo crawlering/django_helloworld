@@ -1,15 +1,11 @@
-pipeline {
-    agent any
-    stages {
-    stage('pull code'){
-        steps {
-        echo 'pull code success!'
-    }}
+node {
+    stage('start...') {
+    if (GIT_COMMIT and GIT_COMMIT==GIT_PREVIOUS_COMMIT) {
+        println '代码拉取更新,'
+	println '查看是否有执行程序是否正在执行...'
     }
-
-    post {
-        always {
-	    sh 'JENKINS_NODE_COOKIE=dontKillMe setsid python3.6 manage.py runserver 0.0.0.0:60001 >> /tmp/django.log 2>&1 &'
-	}
+    else {
+        println '版本没有变化,不做更新'
+    }
     }
 }
