@@ -1,20 +1,24 @@
-node {
-    stage('start...') {
-    println env
-    println env.GIT_COMMIT
-    sh 'printenv'
-    GIT_COMMIT=sh returnStdout: true ,script: 'echo $GIT_COMMIT'
-    GIT_PREVIOUS_COMMIT=sh returnStdout: true ,script: 'echo $GIT_PREVIOUS_COMMIT'
-    echo GIT_COMMIT
-    sh 'echo $GIT_COMMIT'
-    if (GIT_COMMIT==GIT_PREVIOUS_COMMIT) {
-        println GIT_COMMIT
-        println GIT_PREVIOUS_COMMIT
-        println '代码拉取更新,'
-	println '查看是否有执行程序是否正在执行...'
+pipeline {
+    agent any
+    stages {
+        stage('Example') {
+            steps {
+                echo 'Hello World,`pwd`'
+                sh 'pwd'
+                sh 'printenv'
+                script {
+		    sh 'setsid python3.6 manage.py runserver 0.0.0.0:60001 >> /tmp/django.log 2>&1 &'
+		    MY_A='123'
+                 
+                   }
+            }
+	        echo '=======$MY_A'
+                echo 'GIT_PREVIOUS_COMMIT: $GIT_PREVIOUS_COMMIT , GIT_COMMIT: $GIT_COMMIT'
+        }
     }
-    else {
-        println '版本没有变化,不做更新'
-    }
+    post { 
+        always { 
+            echo 'I will always say Hello again!'
+        }
     }
 }
