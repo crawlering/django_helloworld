@@ -2,8 +2,9 @@ pipeline {
     agent any
     stages {
     stage('pull code'){
+        steps {
         echo 'pull code success!'
-    }
+    }}
     }
 
     post {
