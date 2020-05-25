@@ -2,8 +2,10 @@ pipeline {
     agent any
     stages {
         stage('查看环境') {
-
+            steps {
             sh 'printenv'
+
+        }
         }
         stage("检查更新") {
 	    when {
