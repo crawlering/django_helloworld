@@ -1,9 +1,12 @@
 pipeline {
     agent any
     stages {
+        stage('查看环境') {
+
+            sh 'printenv'
+        }
         stage("检查更新") {
 	    when {
-                sh 'printenv'
 	        expression { $GIT_COMMIT==$GIT_PREVIOUS_COMMIT }
 	    }
 	    steps {
