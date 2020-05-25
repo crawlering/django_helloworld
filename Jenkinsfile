@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage("检查更新")
+        stage("检查更新"){
 	    echo "GIT_COMMIT: $GIT_COMMIT \n GIT_PREVIOUS_COMMIT: $GIT_PREVIOUS_COMMIT"
 	    echo "对比版本"
 	    when {
@@ -15,7 +15,7 @@ pipeline {
                     echo "hello"
 		}
 	    }	
-
+    }
     }
 }
 
