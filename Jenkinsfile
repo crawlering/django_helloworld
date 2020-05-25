@@ -11,7 +11,6 @@ pipeline {
 		script {
 		    println "查看是否程序正在运行..."
                     sh 'ps -aux'
-		    sh "ps -aux | grep '/bin/python3.6 manage.py runserver 0.0.0.0:60001' | grep -v grep | awk 'NR==1{print $2}'"
                     echo "hello"
 		}
 	    }	
