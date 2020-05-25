@@ -19,6 +19,9 @@ pipeline {
         stage('查看环境') {
             steps {
             sh 'printenv'
+            echo "============="
+            echo GIT_COMMIT
+            echo  "==============" 	
             
 
         }
