@@ -1,4 +1,5 @@
 pipeline {
+    agent any
     stages {
         stage("检查更新")
 	    echo "GIT_COMMIT: $GIT_COMMIT \n GIT_PREVIOUS_COMMIT: $GIT_PREVIOUS_COMMIT"
