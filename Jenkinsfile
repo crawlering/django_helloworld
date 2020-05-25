@@ -12,8 +12,6 @@ pipeline {
 		script {
 		    println "查看是否程序正在运行..."
                     PY_PID = sh (script: "ps -aux | grep '/bin/python3.6 manage.py runserver 0.0.0.0:60001' | grep -v grep | awk 'NR==1{print \$2}'", returnStdout: true) 
-                    sh 'echo $PY_PID'
-                    sh 'printenv'
                     println PY_PID
                     if (PY_PID) {
                         println  "查询到进程，杀掉该进程: ${PY_PID}"
@@ -30,10 +28,11 @@ pipeline {
           steps {
                     echo "启动服务"
                     sh 'JENKINS_NODE_COOKIE=dontKillMe setsid python3.6 manage.py runserver 0.0.0.0:60001 >> /tmp/django.log 2>&1 &'
+                    script {
                     PY_PID = sh (script: "ps -aux | grep '/bin/python3.6 manage.py runserver 0.0.0.0:60001' | grep -v grep | awk 'NR==1{print \$2}'", returnStdout: true) 
                     println ("服务启动完成，进程号为："+PY_PID)
 
-                }
+                }}
     }
     }
 }
