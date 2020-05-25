@@ -4,12 +4,25 @@ pipeline {
         stage('查看环境') {
             steps {
             sh 'printenv'
+            GIT_COMMIT='''${sh(
+            returnStdout: true,
+            script: "echo $GIT_COMMIT"
+            )}
+            '''
+            GIT_PREVIOUS_COMMIT='''
+            ${sh(
+            returnStdout: true,
+            script: "echo $GIT_PREVIOUS_COMMIT"
+            )
+            }
+            '''
+            
 
         }
         }
         stage("检查更新") {
 	    when {
-	        expression { $GIT_COMMIT==$GIT_PREVIOUS_COMMIT }
+	        expression { GIT_COMMIT==GIT_PREVIOUS_COMMIT }
 	    }
 	    steps {
 	        echo "GIT_COMMIT: $GIT_COMMIT \n GIT_PREVIOUS_COMMIT: $GIT_PREVIOUS_COMMIT"
