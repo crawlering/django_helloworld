@@ -1,9 +1,6 @@
 pipeline {
     agent any
-    stages {
-        stage('查看环境') {
-            steps {
-            sh 'printenv'
+    environment {
             GIT_COMMIT='''${sh(
             returnStdout: true,
             script: "echo $GIT_COMMIT"
@@ -16,6 +13,12 @@ pipeline {
             )
             }
             '''
+
+    }
+    stages {
+        stage('查看环境') {
+            steps {
+            sh 'printenv'
             
 
         }
