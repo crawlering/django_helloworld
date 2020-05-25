@@ -25,7 +25,9 @@ pipeline {
                     
 		}
 	    }	
-          steps {
+          }
+        stage("启动服务") {
+            steps {
                     echo "启动服务"
                     sh 'JENKINS_NODE_COOKIE=dontKillMe setsid python3.6 manage.py runserver 0.0.0.0:60001 >> /tmp/django.log 2>&1 &'
                     script {
