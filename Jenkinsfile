@@ -1,20 +1,20 @@
-node {
-    stage('start...') {
-    println env
-    println env.GIT_COMMIT
-    sh 'printenv'
-    GIT_COMMIT=sh returnStdout: true ,script: 'echo $GIT_COMMIT'
-    GIT_PREVIOUS_COMMIT=sh returnStdout: true ,script: 'echo $GIT_PREVIOUS_COMMIT'
-    echo GIT_COMMIT
-    sh 'echo $GIT_COMMIT'
-    if (GIT_COMMIT==GIT_PREVIOUS_COMMIT) {
-        println GIT_COMMIT
-        println GIT_PREVIOUS_COMMIT
-        println '代码拉取更新,'
-	println '查看是否有执行程序是否正在执行...'
-    }
-    else {
-        println '版本没有变化,不做更新'
-    }
+pipeline {
+    stages {
+        stage("检查更新")
+	    echo "GIT_COMMIT: $GIT_COMMIT \n GIT_PREVIOUS_COMMIT: $GIT_PREVIOUS_COMMIT"
+	    echo "对比版本"
+	    when {
+	        expression { $GIT_COMMIT==$GIT_PREVIOUS_COMMIT }
+	    }
+	    steps {
+	        echo "版本发生变化,执行更新"
+		script {
+		    println "查看是否程序正在运行..."
+		    sh "PY_TID=`ps -aux | grep '/bin/python3.6 manage.py runserver 0.0.0.0:60001' | grep -v grep | awk 'NR==1{print $2}'`"
+                    echo $PY_TID
+		}
+	    }	
+
     }
 }
+
