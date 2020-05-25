@@ -3,10 +3,10 @@ pipeline {
     stages {
         stage("检查更新") {
 	    when {
+                sh 'printenv'
 	        expression { $GIT_COMMIT==$GIT_PREVIOUS_COMMIT }
 	    }
 	    steps {
-                sh 'printenv'
 	        echo "GIT_COMMIT: $GIT_COMMIT \n GIT_PREVIOUS_COMMIT: $GIT_PREVIOUS_COMMIT"
 	        echo "对比版本"
 	        echo "版本发生变化,执行更新"
