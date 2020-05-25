@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage("检查更新") {
 	    when {
-	        expression { "${env.GIT_COMMIT}"=="${env.GIT_PREVIOUS_COMMIT}" }
+	        expression { "${env.GIT_COMMIT}"!="${env.GIT_PREVIOUS_COMMIT}" }
 	    }
 	    steps {
 	        echo "GIT_COMMIT: ${env.GIT_COMMIT} \n GIT_PREVIOUS_COMMIT: ${env.GIT_PREVIOUS_COMMIT}"
@@ -28,11 +28,15 @@ pipeline {
           }
         stage("启动服务") {
             steps {
-                    echo "启动服务"
+                    echo "开始启动服务"
                     sh 'JENKINS_NODE_COOKIE=dontKillMe setsid python3.6 manage.py runserver 0.0.0.0:60001 >> /tmp/django.log 2>&1 &'
                     script {
                     PY_PID = sh (script: "ps -aux | grep '/bin/python3.6 manage.py runserver 0.0.0.0:60001' | grep -v grep | awk 'NR==1{print \$2}'", returnStdout: true) 
-                    println ("服务启动完成，进程号为："+PY_PID)
+                    if (PY_PID){
+                        println ("服务启动完成，进程号为："+PY_PID)}
+                    else { 
+                        println "启动失败，请查看日志文件 cat /tmp/django.log"
+                    }
 
                 }}
     }
